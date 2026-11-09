@@ -2,22 +2,22 @@
 
 int main(void)
 {
-    float ylimit;
-    double g = 9.8;
-    double y = 0.0;
-    double v = 0.0;
-    double t;
-    scanf("%f", &ylimit);
-    if (ylimit <= 0)
-    {
+    double target;
+    if (scanf("%lf", &target) != 1) {
+        return 0;
+    }
+    if (target < 0.0) {
         printf("NG");
         return 0;
     }
-    for (t = 0.0; y < ylimit; t += 0.1)
-    {
-        v = g * t;
-        y = g * t * t / 2;
+
+    const double gravity = 3.71;
+    for (double time = 0.0; ; time += 0.1) {
+        double distance = gravity * time * time / 2.0;
+        double speed = gravity * time;
+        if (distance >= target) {
+            printf("%.3f", speed);
+            return 0;
+        }
     }
-    printf("%.1f", v);
-    return 0;
 }
